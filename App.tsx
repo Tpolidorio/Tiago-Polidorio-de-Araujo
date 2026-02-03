@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { WavyBackground } from "./components/ui/wavy-background";
 import { FadeIn } from "./components/ui/fade-in";
 import { ImageAutoSlider } from "./components/ui/image-auto-slider";
-import { Check, MessageCircle, ArrowRight, Sparkles, Star, Zap, Plus, Minus } from "lucide-react";
+import { Check, MessageCircle, ArrowRight, Sparkles, Star, Zap, Plus, Minus, Lock, CreditCard } from "lucide-react";
 import { cn } from "./lib/utils";
 
 // --- COMPONENTS ---
@@ -74,6 +74,7 @@ const Pricing = () => {
       description: "Ideal para pequenas coleções e dropshipping.",
       features: ["10 Fotos em Alta Resolução", "2 Modelos de IA Exclusivos", "5 Cenários Urbanos", "Entrega em 24h"],
       highlight: false,
+      isPayment: true,
     },
     {
       name: "Pro Pack",
@@ -81,6 +82,7 @@ const Pricing = () => {
       description: "O favorito das marcas em crescimento.",
       features: ["50 Fotos em Alta Resolução", "8 Modelos Diversificados", "Cenários Premium (Praia, Estúdio, Europa)", "Ajustes de Iluminação Realista", "Suporte Prioritário"],
       highlight: true,
+      isPayment: true,
     },
     {
       name: "Enterprise",
@@ -88,6 +90,7 @@ const Pricing = () => {
       description: "Solução completa para grandes e-commerces.",
       features: ["Fotos Ilimitadas", "Modelos Exclusivos com sua Identidade", "Cenários Customizados", "Integração via API", "Gerente de Conta"],
       highlight: false,
+      isPayment: false,
     },
   ];
 
@@ -133,19 +136,32 @@ const Pricing = () => {
                       ))}
                     </ul>
 
-                    <a
-                      href={"https://api.whatsapp.com/send?phone=5511953071333&text=*Ol%C3%A1!%20Quero%20o%20pode%20saber%20mais%20sobre%20o%20Pack%20" + pack.name + "*"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={cn(
-                        "w-full py-3 rounded-xl font-bold text-center transition-colors",
-                        pack.highlight 
-                          ? "bg-purple-600 hover:bg-purple-700 text-white" 
-                          : "bg-white text-black hover:bg-zinc-200"
-                      )}
-                    >
-                      Selecionar {pack.name}
-                    </a>
+                    {pack.isPayment ? (
+                        <>
+                            <a
+                              href={"https://api.whatsapp.com/send?phone=5511953071333&text=*Ol%C3%A1!%20Quero%20o%20link%20do%20Mercado%20Pago%20para%20o%20" + pack.name + "*"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full py-3 rounded-xl font-bold text-center transition-all bg-[#009EE3] hover:bg-[#0081b8] text-white flex items-center justify-center gap-2 mb-3"
+                            >
+                              <CreditCard size={18} />
+                              Pagar com Mercado Pago
+                            </a>
+                            <div className="flex items-center justify-center gap-1.5 text-xs text-zinc-500">
+                                <Lock size={12} className="text-[#009EE3]" />
+                                <span>Compra Garantida e Segura</span>
+                            </div>
+                        </>
+                    ) : (
+                        <a
+                          href={"https://api.whatsapp.com/send?phone=5511953071333&text=*Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20Enterprise*"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-3 rounded-xl font-bold text-center transition-colors bg-white text-black hover:bg-zinc-200"
+                        >
+                          Falar com Consultor
+                        </a>
+                    )}
                   </div>
                 </FadeIn>
               </React.Fragment>
